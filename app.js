@@ -1,12 +1,12 @@
 function populateBookmarks(){
 	debugger;
 	chrome.bookmarks.getTree(		
-			function(bookmarkTreeNodes){
-				$('#bookmarks').append(dumpTreeNodes(bookmarkTreeNodes));			
+			function(bookmarkNodes){
+				$('#bookmarks').append(dumpNodes(bookmarkNodes));			
 			});
 }
 
-function dumpTreeNodes(bookmarkNodes){
+function dumpNodes(bookmarkNodes){
 	var list = $('<ul>');
 	var i;
 	for (i = 0; i < bookmarkNodes.length; i++){
@@ -16,14 +16,20 @@ function dumpTreeNodes(bookmarkNodes){
 }
 
 function dumpNode(bookmarkNode){
-	//make a li
-	//if this node has children, li.append(dumpTreeNodes)
-	//return li
-	
 	var li = $('<li>');
-	li.append(bookmarkNode.title);
+
+	var anchor = $('<a>');
+	anchor.attr('href', bookmarkNode.url);
+	anchor.text(bookmarkNode.title);
+
+	//TODO: use storage api to store this locally
+	var img = $('<img>');
+	img.attr('src', 'chrome://favicon/' + bookmarkNode.url);
+
+	li.append(img);
+	li.append(anchor);
 	if (bookmarkNode.children && bookmarkNode.children.length >0)
-		li.append(dumpTreeNodes(bookmarkNode.children));
+		li.append(dumpNodes(bookmarkNode.children));
 	
 	return li;
 }

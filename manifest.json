@@ -5,9 +5,9 @@
   "description": "Improved Chrome bookmarks",
   "version": "1.0",
 
-  "permissions": [
+  "permissions": [	  
     "bookmarks",
-    "https://ajax.googleapis.com/"
+    "chrome://favicon/"
   ],
 
   "chrome_url_overrides" : {
