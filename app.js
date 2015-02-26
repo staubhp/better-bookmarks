@@ -51,8 +51,8 @@ function init(){
 	$('.level1').show();		
 	$('.folder').click(function(event){
 		debugger;
-		$(this).children('ul').show();
-		$(this).children('ul').children('ul').show()
+		$(this).children('ul').toggle();
+		$(this).children('ul').children('ul').toggle()
 		event.stopPropagation();
 	});
 }
